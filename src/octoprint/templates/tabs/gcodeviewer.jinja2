@@ -1,19 +1,8 @@
 <div data-bind="visible: !waitForApproval()">
     <div id="canvas_container" class="canvas_container" tabindex="0" data-bind="event: { keydown: onKeyDown, mouseover: onMouseOver, mouseout: onMouseOut }">
         <input id="gcode_slider_layers" type="text">
-        <canvas id="gcode_canvas" width="568" height="568"></canvas>
+        <canvas id="gcode_canvas" width="568" height="500"></canvas>
         <input id="gcode_slider_commands" type="text" style="width: 554px">
-    </div>
-
-    <div class="layer-buttons btn-group-toolbar row-fluid">
-        <button type="button" class="btn btn-primary btn-medium span6" data-bind = "click: decrementLayer, enable: layerSelectionEnabled() && layerDownEnabled()">
-            <i class="fa fa-arrow-left"></i>
-            <span>{{ _('Previous layer') }}</span>
-        </button>
-        <button type="button" class="btn btn-primary btn-medium span6" data-bind = "click: incrementLayer, enable: layerSelectionEnabled() && layerUpEnabled()">
-            <span>{{ _('Next layer') }}</span>
-            <i class="fa fa-arrow-right"></i>
-        </button>
     </div>
 
     <div class="progress progress-text-centered">
@@ -24,13 +13,6 @@
     </div>
 
     <div class="row-fluid">
-        <div class="span7">
-            <h1>{{ _('Model info') }}</h1>
-            <p data-bind="html: ui_modelInfo"></p>
-
-            <h1>{{ _('Layer info') }}</h1>
-            <p data-bind="html: ui_layerInfo"></p>
-        </div>
         <div class="span5">
             <h1>{{ _('Renderer options') }}</h1>
 
@@ -95,16 +77,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="muted">
-        <small>{% trans %}
-            Note that the time and usage values in this tab are <strong>estimated</strong> by the GCODE viewer in your
-            browser and might differ from the values <strong>estimated</strong> by the server that are displayed in the
-            "State" and "Files" panels in the sidebar due to slightly different implementations. Also note that these
-            <strong>estimated</strong> values may be inaccurate since they can also take information present in the
-            GCODE file into account.
-        {% endtrans %}</small>
     </div>
 </div>
 <div data-bind="visible: waitForApproval">

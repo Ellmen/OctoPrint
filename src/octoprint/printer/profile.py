@@ -207,14 +207,14 @@ class PrinterProfileManager(object):
 	default = dict(
 		id = "_default",
 		name = "Default",
-		model = "Generic RepRap Printer",
+		model = "Orthoprinter",
 		color = "default",
 		volume=dict(
-			width = 200,
-			depth = 200,
-			height = 200,
+			width = 280,
+			depth = 240,
+			height = 35.7,
 			formFactor = BedFormFactor.RECTANGULAR,
-			origin = BedOrigin.LOWERLEFT,
+			origin = BedOrigin.CENTER,
 			custom_box = False
 		),
 		heatedBed = True,
@@ -227,9 +227,9 @@ class PrinterProfileManager(object):
 			sharedNozzle = False
 		),
 		axes=dict(
-			x = dict(speed=6000, inverted=False),
-			y = dict(speed=6000, inverted=False),
-			z = dict(speed=200, inverted=False),
+			x = dict(speed=5000, inverted=False),
+			y = dict(speed=5000, inverted=False),
+			z = dict(speed=1000, inverted=False),
 			e = dict(speed=300, inverted=False)
 		)
 	)

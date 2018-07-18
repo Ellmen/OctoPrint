@@ -20,18 +20,7 @@
     </small>
 </div>
 
-<div class="row-fluid">
-    <div class="span6" id="terminal-filterpanel">
-        <div data-bind="foreach: filters, visible: fancyFunctionality()">
-            <label class="checkbox">
-                <input type="checkbox" data-bind="attr: { value: regex }, checked: $parent.activeFilters"> <span data-bind="text: name"></span>
-            </label>
-        </div>
-    </div>
-</div>
-
 <div>
-    <div><small><a href="#" class="muted" data-bind="toggleContent: { class: 'fa-caret-right fa-caret-down', container: '#term .hide' }"><i class="fa fa-caret-right"></i> {{ _('Advanced options') }}</a></small></div>
     <div class="hide">
         <p class="row-fluid">
             <button class="btn btn-primary btn-block" type="button" data-bind="click: fakeAck, enable: isOperational() && loginState.isUser()">{{ _("Fake Acknowledgement") }}</button>
