@@ -52,21 +52,16 @@
 </div>
 <div style="display: none;" data-bind="visible: loginState.isUser">
     <div class="row-fluid upload-buttons">
-   			<span class="btn btn-primary fileinput-button span6" data-bind="enable: $root.loginState.isUser(), css: {disabled: !$root.loginState.isUser()}" style="margin-right: 5px">
-   				<i class="fa fa-upload"></i>
-   				<span>{{ _('Upload') }}</span>
-   				<input id="gcode_upload" accept="{{ ",".join(supportedExtensions) }}" type="file" name="file" class="fileinput-button" data-bind="enable: loginState.isUser()">
-   			</span>
-   			<div id="gcode_upload_progress" class="progress progress-text-centered">
-   				<span class="progress-text-back" data-bind="text: uploadProgressText"></span>
-   				<div class="bar">
-   				<span class="progress-text-front" data-bind="copyWidth: ':parent :parent :parent :parent form', text: uploadProgressText"></span>
-   			</div>
-   		</div>
-    <div id="gcode_upload_progress" class="progress progress-text-centered">
-        <span class="progress-text-back" data-bind="text: uploadProgressText"></span>
-        <div class="bar">
-            <span class="progress-text-front" data-bind="copyWidth: ':parent :parent :parent :parent form', text: uploadProgressText"></span>
-        </div>
-    </div>
+		<span class="btn btn-primary fileinput-button span6" data-bind="enable: $root.loginState.isUser(), css: {disabled: !$root.loginState.isUser()}" style="margin-right: 5px">
+			<i class="fa fa-upload"></i>
+			<span>{{ _('Upload') }}</span>
+			<input id="gcode_upload" accept="{{ ",".join(supportedExtensions) }}" type="file" name="file" class="fileinput-button" data-bind="enable: loginState.isUser()">
+		</span>
+		<div id="gcode_upload_progress" class="progress progress-text-centered">
+			<span class="progress-text-back" data-bind="text: uploadProgressText"></span>
+			<div class="bar">
+			<span class="progress-text-front" data-bind="copyWidth: ':parent :parent :parent :parent form', text: uploadProgressText"></span>
+			</div>
+		</div>
+	</div>
 </div>
