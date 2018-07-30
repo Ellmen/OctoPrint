@@ -154,106 +154,106 @@ GCODE.renderer = (function(){
         trackTransforms(ctx);
 
         // dragging => translating
-        canvas.addEventListener('mousedown', function(event){
-            document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
+        // canvas.addEventListener('mousedown', function(event){
+        //     document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
 
-            // remember starting point of dragging gesture
-            lastX = (event.offsetX || (event.pageX - canvas.offsetLeft)) * pixelRatio;
-            lastY = (event.offsetY || (event.pageY - canvas.offsetTop)) * pixelRatio;
-            dragStart = ctx.transformedPoint(lastX, lastY);
+        //     // remember starting point of dragging gesture
+        //     lastX = (event.offsetX || (event.pageX - canvas.offsetLeft)) * pixelRatio;
+        //     lastY = (event.offsetY || (event.pageY - canvas.offsetTop)) * pixelRatio;
+        //     dragStart = ctx.transformedPoint(lastX, lastY);
 
-            // not yet dragged anything
-            dragged = false;
-        }, false);
+        //     // not yet dragged anything
+        //     dragged = false;
+        // }, false);
 
-        canvas.addEventListener('mousemove', function(event){
-            // save current mouse coordinates
-            lastX = (event.offsetX || (event.pageX - canvas.offsetLeft)) * pixelRatio;
-            lastY = (event.offsetY || (event.pageY - canvas.offsetTop)) * pixelRatio;
+        // canvas.addEventListener('mousemove', function(event){
+        //     // save current mouse coordinates
+        //     lastX = (event.offsetX || (event.pageX - canvas.offsetLeft)) * pixelRatio;
+        //     lastY = (event.offsetY || (event.pageY - canvas.offsetTop)) * pixelRatio;
 
-            // mouse movement => dragged
-            dragged = true;
+        //     // mouse movement => dragged
+        //     dragged = true;
 
-            if (dragStart !== undefined){
-                // translate
-                var pt = ctx.transformedPoint(lastX,lastY);
-                ctx.translate(pt.x - dragStart.x, pt.y - dragStart.y);
-                reRender();
+        //     if (dragStart !== undefined){
+        //         // translate
+        //         var pt = ctx.transformedPoint(lastX,lastY);
+        //         ctx.translate(pt.x - dragStart.x, pt.y - dragStart.y);
+        //         reRender();
 
-                renderOptions["centerViewport"] = false;
-                renderOptions["zoomInOnModel"] = false;
-                renderOptions["zoomInOnBed"] = false;
-                offsetModelX = 0;
-                offsetModelY = 0;
-                offsetBedX = 0;
-                offsetBedY = 0;
-                scaleX = 1;
-                scaleY = 1;
+        //         renderOptions["centerViewport"] = false;
+        //         renderOptions["zoomInOnModel"] = false;
+        //         renderOptions["zoomInOnBed"] = false;
+        //         offsetModelX = 0;
+        //         offsetModelY = 0;
+        //         offsetBedX = 0;
+        //         offsetBedY = 0;
+        //         scaleX = 1;
+        //         scaleY = 1;
 
-                if (renderOptions["onInternalOptionChange"] !== undefined) {
-                    renderOptions["onInternalOptionChange"]({
-                        centerViewport: false,
-                        moveModel: false,
-                        zoomInOnModel: false,
-                        zoomInOnBed: false
-                    });
-                }
-            }
-        }, false);
+        //         if (renderOptions["onInternalOptionChange"] !== undefined) {
+        //             renderOptions["onInternalOptionChange"]({
+        //                 centerViewport: false,
+        //                 moveModel: false,
+        //                 zoomInOnModel: false,
+        //                 zoomInOnBed: false
+        //             });
+        //         }
+        //     }
+        // }, false);
 
-        canvas.addEventListener('mouseup', function(event){
-            // reset dragStart
-            dragStart = undefined;
-        }, false);
+        // canvas.addEventListener('mouseup', function(event){
+        //     // reset dragStart
+        //     dragStart = undefined;
+        // }, false);
 
-        // mouse wheel => zooming
-        var zoom = function(clicks){
-            // focus on last mouse position prior to zoom
-            var pt = ctx.transformedPoint(lastX, lastY);
-            ctx.translate(pt.x,pt.y);
+        // // mouse wheel => zooming
+        // var zoom = function(clicks){
+        //     // focus on last mouse position prior to zoom
+        //     var pt = ctx.transformedPoint(lastX, lastY);
+        //     ctx.translate(pt.x,pt.y);
 
-            // determine zooming factor and perform zoom
-            var factor = Math.pow(scaleFactor,clicks);
-            ctx.scale(factor,factor);
+        //     // determine zooming factor and perform zoom
+        //     var factor = Math.pow(scaleFactor,clicks);
+        //     ctx.scale(factor,factor);
 
-            // return to old position
-            ctx.translate(-pt.x,-pt.y);
+        //     // return to old position
+        //     ctx.translate(-pt.x,-pt.y);
 
-            // render
-            reRender();
+        //     // render
+        //     reRender();
 
-            // disable conflicting options
-            renderOptions["zoomInOnModel"] = false;
-            renderOptions["zoomInOnBed"] = false;
-            offsetModelX = 0;
-            offsetModelY = 0;
-            offsetBedX = 0;
-            offsetBedY = 0;
-            scaleX = 1;
-            scaleY = 1;
+        //     // disable conflicting options
+        //     renderOptions["zoomInOnModel"] = false;
+        //     renderOptions["zoomInOnBed"] = false;
+        //     offsetModelX = 0;
+        //     offsetModelY = 0;
+        //     offsetBedX = 0;
+        //     offsetBedY = 0;
+        //     scaleX = 1;
+        //     scaleY = 1;
 
-            if (renderOptions["onInternalOptionChange"] !== undefined) {
-                renderOptions["onInternalOptionChange"]({
-                    zoomInOnModel: false,
-                    zoomInOnBed: false
-                });
-            }
-        };
-        var handleScroll = function(event){
-            var delta;
+        //     if (renderOptions["onInternalOptionChange"] !== undefined) {
+        //         renderOptions["onInternalOptionChange"]({
+        //             zoomInOnModel: false,
+        //             zoomInOnBed: false
+        //         });
+        //     }
+        // };
+        // var handleScroll = function(event){
+        //     var delta;
 
-            // determine zoom direction & delta
-            if (event.detail < 0 || event.wheelDelta > 0) {
-                delta = zoomFactorDelta;
-            } else {
-                delta = -1 * zoomFactorDelta;
-            }
-            if (delta) zoom(delta);
+        //     // determine zoom direction & delta
+        //     if (event.detail < 0 || event.wheelDelta > 0) {
+        //         delta = zoomFactorDelta;
+        //     } else {
+        //         delta = -1 * zoomFactorDelta;
+        //     }
+        //     if (delta) zoom(delta);
 
-            return event.preventDefault() && false;
-        };
-        canvas.addEventListener('DOMMouseScroll',handleScroll,false);
-        canvas.addEventListener('mousewheel',handleScroll,false);
+        //     return event.preventDefault() && false;
+        // };
+        // canvas.addEventListener('DOMMouseScroll',handleScroll,false);
+        // canvas.addEventListener('mousewheel',handleScroll,false);
     };
 
     var drawGrid = function() {
