@@ -385,7 +385,31 @@ $(function() {
                 OctoPrint.files.download("local", path)
                     .done(function(response, rstatus) {
                         if(rstatus === 'success'){
-                            self.showGCodeViewer(response, rstatus);
+                            let height = 1;
+                            const newResp = response.split('\n').map(function(line){
+                                let newLine = '';
+                                let zCom = false;
+                                [...line].forEach(char => {
+                                  if (char === 'Z' && line.startsWith('G1')) {
+                                    zCom = true;
+                                  }
+                                  if (!zCom) {
+                                    newLine += char;
+                                  }
+                                  if (char === ' ' && line.startsWith('G1')) {
+                                    zCom = false;
+                                  }
+                                });
+                                if (['G1', 'G01', 'G2', 'G02', 'G3', 'G03'].some(function(cmd){return newLine.startsWith(cmd + ' ')})) {
+                                  height += 1;
+                                  return newLine + ` E${height}`;
+                                } else {
+                                  return newLine;
+                                }
+                            }).join('\n');
+                            // console.log(newResp)
+
+                            self.showGCodeViewer(newResp, rstatus);
                             self.loadedFilepath = path;
                             self.loadedFileDate = date;
                             self.status = "idle";
