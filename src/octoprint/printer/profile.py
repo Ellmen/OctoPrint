@@ -206,8 +206,8 @@ class PrinterProfileManager(object):
 
 	default = dict(
 		id = "_default",
-		name = "Default",
-		model = "Orthoprinter",
+		name = "Omo",
+		model = "Omo",
 		color = "default",
 		volume=dict(
 			width = 280,
