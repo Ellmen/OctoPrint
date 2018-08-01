@@ -1,9 +1,8 @@
 <span title="{{ _('Current printer state') }}">{{ _('State') }}</span>: <strong data-bind="text: stateString"></strong><br>
 <span title="{{ _('Name of file currently selected for printing') }}">{{ _('File') }}</span>: <strong data-bind="text: filedisplay, attr: {title: filepath}"></strong>&nbsp;<strong data-bind="visible: sd">(SD)</strong><br>
-: <strong data-bind="text: timelapseString"></strong><br>
 <span title="">{{ _('Estimated Cutting Time') }}</span>: <strong data-bind="text: estimatedPrintTimeString"></strong><br>
 <span title="">{{ _('Time Elapsed') }}</span>: <strong data-bind="text: printTimeString"></strong><br>
-<span title="{{ _('Time Remaining') }}">{{ _('Print Time Left') }}</span>: <strong data-bind="text: printTimeLeftString"></strong> <span id="state_printtimeleft_popover" style="display: none" data-bind="visible: printTimeLeftOrigin, attr: {title: printTimeLeftOriginString}, css: printTimeLeftOriginClass">&#9679;</span><br>
+<span title="{{ _('Time Remaining') }}">{{ _('Time Remaining') }}</span>: <strong data-bind="text: printTimeLeftString"></strong> <span id="state_printtimeleft_popover" style="display: none" data-bind="visible: printTimeLeftOrigin, attr: {title: printTimeLeftOriginString}, css: printTimeLeftOriginClass">&#9679;</span><br>
 
 <div class="progress progress-text-centered">
     <span class="progress-text-back" data-bind="text: progressBarString()"></span>
