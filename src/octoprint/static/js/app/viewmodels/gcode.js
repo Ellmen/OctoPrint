@@ -55,7 +55,7 @@ $(function() {
         self.renderer_syncProgress = ko.observable(true);
 
         self.reader_sortLayers = ko.observable(true);
-        self.reader_hideEmptyLayers = ko.observable(true);
+        self.reader_hideEmptyLayers = ko.observable(false);
         self.reader_ignoreOutsideBed = ko.observable(true);
 
         self.layerSelectionEnabled = ko.observable(false);
@@ -341,7 +341,7 @@ $(function() {
             self.renderer_syncProgress(true);
 
             self.reader_sortLayers(true);
-            self.reader_hideEmptyLayers(true);
+            self.reader_hideEmptyLayers(false);
             self.reader_ignoreOutsideBed(true);
         };
 
